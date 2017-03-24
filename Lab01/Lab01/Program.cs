@@ -6,7 +6,7 @@ namespace Lab01
 {
     public class Program
     {
-        static void Main()
+        static void Main( string[] args )
         {
             string baseAddress = "http://localhost:9000/";
 
