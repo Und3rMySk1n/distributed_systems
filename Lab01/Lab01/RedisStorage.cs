@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StackExchange.Redis;
+using System.Configuration;
 
 namespace Lab01
 {
@@ -11,11 +12,12 @@ namespace Lab01
     {
         private readonly IDatabase _db;
 
-        public RedisStorage( IDatabase db )
+        public RedisStorage(  )
         {
-            if ( db == null ) throw new ArgumentNullException( nameof( db ) );
+            var redisConnectionString = ConfigurationManager.AppSettings["redisConnectionString"];
+            ConnectionMultiplexer redis = ConnectionMultiplexer.Connect(redisConnectionString);            
 
-            _db = db;
+            _db = redis.GetDatabase();
         }
 
         public void Save( string id, string value )

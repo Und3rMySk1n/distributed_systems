@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Self-hosted application test</title>
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="form_wrapper">
+      <h1 class="form_title">Enter value:</h1>
+      <form action="/php/set_value.php"
+            target="test_key_post" method="post" id="valuesEnterForm"
+            enctype="application/x-www-form-urlencoded">
+        <label><input type="text" name="value" id="value" class="value_input" placeholder="Enter value"></label>
+        <input type="submit" value="Submit" class="submit_button">
+      </form>
+    </div>
+  </body>
+</html>

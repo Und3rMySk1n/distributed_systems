@@ -2,6 +2,7 @@
 {
     public class Data
     {
-        public string Value { get; set; }
+        public string id { get; set; }
+        public string value { get; set; }
     }
 }

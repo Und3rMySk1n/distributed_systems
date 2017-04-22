@@ -19,7 +19,8 @@ namespace Lab01
                 var response = client.GetAsync(baseAddress + "api/values").Result;
 
                 Console.WriteLine(response);
-                Console.WriteLine(response.Content.ReadAsStringAsync().Result);
+                Console.WriteLine("Self-hosted sample application with frontend and backend");
+                Console.WriteLine("Press ENTER to exit...");
                 Console.ReadLine();
             }
         }
