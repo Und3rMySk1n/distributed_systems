@@ -2,6 +2,7 @@
 
     const SELF_HOSTED_APPLICATION_URL = "http://localhost:9000/api/values/";
     const SHOW_VALUE_URL = "/php/get_value.php";
+    const HTTP_STATUS_OK = 200;
 
     $value = (isset($_POST["value"])) ? $_POST["value"] : null;
     if ($value == null)
@@ -21,10 +22,11 @@
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
 
     $response = curl_exec($ch);
-    if(!$response)
+    $resultStatus = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    if($resultStatus != HTTP_STATUS_OK)
     {
         die("Could not save values...");
     }
 
-    $response = str_replace('"', "", $response);
-    header("Location: " . SHOW_VALUE_URL . "?id=" . $response);
+    header("Location: " . SHOW_VALUE_URL . "?id=0");

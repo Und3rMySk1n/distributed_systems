@@ -30,13 +30,22 @@ namespace Lab01
         }
 
         // POST api/values 
-        public string Post([FromBody]Data data)
+        public IHttpActionResult Post([FromBody]Data data)
         {
-            Thread.Sleep(500);
-            Console.WriteLine("Writing Data: " + data?.value);
+            // добавить проверку на null для data
+            // id гуляет между приложениями
 
-            _storage.Save(data?.id, data?.value);
-            return data?.id;
+            if (data.value == null)
+            {
+                Console.WriteLine("Incorrect value");
+                throw new Exception("Incorrect value");
+            }
+            
+            Thread.Sleep(500);
+            Console.WriteLine("Writing Data: " + data.value);
+            
+            _storage.Save(data.id, data.value);
+            return StatusCode(System.Net.HttpStatusCode.OK);
         }
     }
 }
