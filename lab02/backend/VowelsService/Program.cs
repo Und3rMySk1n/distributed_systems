@@ -11,6 +11,9 @@ namespace VowelsService
         static void Main(string[] args)
         {
             Console.WriteLine("MassTransit test started...");
+            var message = new Message { Text = "This is first message!" };
+            var messageService = new MessageService { };
+            messageService.Publish(message);
         }
     }
 }

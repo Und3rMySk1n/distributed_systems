@@ -7,11 +7,11 @@ using MassTransit;
 
 namespace VowelsService
 {  
-    public class OrderService
+    public class MessageService
     {
         IBusControl busControl;
 
-        public OrderService()
+        public MessageService()
         {
             busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
             {
@@ -21,15 +21,20 @@ namespace VowelsService
                     h.Password("guest");
                 });
 
-                cfg.ReceiveEndpoint(host, "submit_order_queue", e =>
+                cfg.ReceiveEndpoint(host, "message_queue", e =>
                 {
-                    e.Consumer<SubmitOrderConsumer>();
+                    e.Consumer<MessageConsumer>();
                 });
             });
             busControl.Start();
         }
 
-        ~OrderService()
+        public void Publish(Message message)
+        {
+            busControl.Publish<Message>(message);
+        }
+
+        ~MessageService()
         {
             busControl.Stop();
         }

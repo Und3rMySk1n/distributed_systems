@@ -8,11 +8,8 @@ using MassTransit;
 
 namespace VowelsService
 {
-    public interface SubmitOrder
-        : CorrelatedBy<Guid>
+    public class Message
     {
-        DateTime SubmitDate { get; }
-        string CustomerNumber { get; }
-        string OrderNumber { get; }
+        public string Text { get; set; }
     }
 }
