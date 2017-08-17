@@ -10,8 +10,6 @@ namespace VowelsService
     {
         static void Main(string[] args)
         {
-            
-
             string baseAddress = "http://localhost:9000/";
 
             // Start OWIN host 

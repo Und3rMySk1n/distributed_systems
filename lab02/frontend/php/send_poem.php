@@ -21,8 +21,9 @@
     foreach ($textByLines as $line)
     {
         $data = [
-            "id"    => $id,
-            "value" => $line
+            "id"     => $id,
+            "vowels" => "0",
+            "value"  => $line
         ];
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
         $response = curl_exec($ch);

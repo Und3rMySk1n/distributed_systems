@@ -48,7 +48,6 @@ namespace VowelsService
                                      routingKey: _queueName,
                                      basicProperties: null,
                                      body: body);
-                Console.WriteLine("Sent: ", message);
             }
         }
     }

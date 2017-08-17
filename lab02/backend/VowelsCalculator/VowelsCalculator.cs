@@ -5,6 +5,7 @@ using System;
 using System.Text;
 using System.Xml.Serialization;
 using VowelsServiceLib;
+using System.Linq;
 
 namespace VowelsCalculator
 {
@@ -36,6 +37,9 @@ namespace VowelsCalculator
                     }
 
                     var resultMessage = (Data)messageAsObject;
+                    resultMessage.vowels = CountVowels(resultMessage.value).ToString();
+
+                    Console.WriteLine("Vowels: " + resultMessage.vowels);
                     Console.WriteLine("Line number: " + resultMessage.id);
                     Console.WriteLine(resultMessage.value);
                 };
@@ -46,6 +50,19 @@ namespace VowelsCalculator
                 Console.WriteLine(" Press [enter] to exit.");
                 Console.ReadLine();
             }
+        }
+
+        private static int CountVowels(string word)
+        {
+            char[] split = word.ToLowerInvariant().ToCharArray();
+            char[] vowels = { 'a', 'e', 'i', 'o', 'u', 'y' };
+            int count = 0;
+            foreach (char vowel in split)
+            {
+                if (vowels.Contains(vowel))
+                    count++;
+            }
+            return count;
         }
     }
 }
