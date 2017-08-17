@@ -1,7 +1,10 @@
-﻿using RabbitMQ.Client;
+﻿using System.IO;
+using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
 using System.Text;
+using System.Xml.Serialization;
+using VowelsServiceLib;
 
 namespace VowelsCalculator
 {
@@ -24,7 +27,17 @@ namespace VowelsCalculator
                 {
                     var body = ea.Body;
                     var message = Encoding.UTF8.GetString(body);
-                    Console.WriteLine(" [x] Received {0}", message);
+                    object messageAsObject;
+
+                    XmlSerializer serializer = new XmlSerializer(typeof(Data));
+                    using (StringReader textReader = new StringReader(message))
+                    {
+                        messageAsObject = serializer.Deserialize(textReader);
+                    }
+
+                    var resultMessage = (Data)messageAsObject;
+                    Console.WriteLine("Line number: " + resultMessage.id);
+                    Console.WriteLine(resultMessage.value);
                 };
                 channel.BasicConsume(queue: "hello",
                                      noAck: true,

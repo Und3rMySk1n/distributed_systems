@@ -2,6 +2,7 @@
 using System.Web.Http;
 using System.Threading;
 using System;
+using VowelsServiceLib;
 
 namespace VowelsService
 {

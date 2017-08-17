@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RabbitMQ.Client;
 using System.Xml.Serialization;
+using VowelsServiceLib;
 
 namespace VowelsService
 {
@@ -47,7 +48,7 @@ namespace VowelsService
                                      routingKey: _queueName,
                                      basicProperties: null,
                                      body: body);
-                Console.WriteLine(" [x] Sent {0}", message);
+                Console.WriteLine("Sent: ", message);
             }
         }
     }

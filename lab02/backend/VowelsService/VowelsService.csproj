@@ -113,7 +113,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data.cs" />
     <Compile Include="IStorage.cs" />
     <Compile Include="MessageProducer.cs" />
     <Compile Include="Program.cs" />
@@ -125,6 +124,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VowelsServiceLib\VowelsServiceLib.csproj">
+      <Project>{d12f6588-60cf-4f95-9507-7c811e680e9a}</Project>
+      <Name>VowelsServiceLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
