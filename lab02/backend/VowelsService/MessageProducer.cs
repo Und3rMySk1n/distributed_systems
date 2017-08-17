@@ -1,9 +1,11 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RabbitMQ.Client;
+using System.Xml.Serialization;
 
 namespace VowelsService
 {
@@ -33,15 +35,20 @@ namespace VowelsService
             _connection.Close();
         }
 
-        public void SendMessage(string message)
+        public void SendMessage(Data message)
         {
-            var body = Encoding.UTF8.GetBytes(message);
+            XmlSerializer serializer = new XmlSerializer(typeof(Data));
+            using (StringWriter textWriter = new StringWriter())
+            {
+                serializer.Serialize(textWriter, message);
+                var body = Encoding.UTF8.GetBytes(textWriter.ToString());
 
-            _channel.BasicPublish(exchange: "",
-                                 routingKey: _queueName,
-                                 basicProperties: null,
-                                 body: body);
-            Console.WriteLine(" [x] Sent {0}", message);
+                _channel.BasicPublish(exchange: "",
+                                     routingKey: _queueName,
+                                     basicProperties: null,
+                                     body: body);
+                Console.WriteLine(" [x] Sent {0}", message);
+            }
         }
     }
 }

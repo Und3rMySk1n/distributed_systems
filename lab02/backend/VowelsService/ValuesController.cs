@@ -34,7 +34,7 @@ namespace VowelsService
             Thread.Sleep(500);
             Console.WriteLine("Writing Data: " + data.value);
 
-            _producer.SendMessage(data.value);
+            _producer.SendMessage(data);
 
             //_storage.Save(data.id, data.value);
             return StatusCode(System.Net.HttpStatusCode.OK);
