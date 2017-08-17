@@ -1,35 +1,32 @@
 ﻿using System;
+using Microsoft.Owin.Hosting;
+using System.Net.Http;
 using RabbitMQ.Client;
 using System.Text;
 
 namespace VowelsService
 {
-    class MessageService
+    public class Program
     {
-        public static void Main()
+        static void Main(string[] args)
         {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
-            using (var connection = factory.CreateConnection())
-            using (var channel = connection.CreateModel())
+            
+
+            string baseAddress = "http://localhost:9000/";
+
+            // Start OWIN host 
+            using (WebApp.Start<Startup>(url: baseAddress))
             {
-                channel.QueueDeclare(queue: "hello",
-                                     durable: false,
-                                     exclusive: false,
-                                     autoDelete: false,
-                                     arguments: null);
+                // Create HttpCient and make a request to api/values 
+                HttpClient client = new HttpClient();
 
-                string message = "Hello World!";
-                var body = Encoding.UTF8.GetBytes(message);
+                var response = client.GetAsync(baseAddress + "api/values").Result;
 
-                channel.BasicPublish(exchange: "",
-                                     routingKey: "hello",
-                                     basicProperties: null,
-                                     body: body);
-                Console.WriteLine(" [x] Sent {0}", message);
+                Console.WriteLine(response);
+                Console.WriteLine("Self-hosted poem analyzer");
+                Console.WriteLine("Press ENTER to exit...");
+                Console.ReadLine();
             }
-
-            Console.WriteLine(" Press [enter] to exit.");
-            Console.ReadLine();
         }
     }
 }
