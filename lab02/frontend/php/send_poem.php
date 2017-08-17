@@ -10,25 +10,31 @@
         die("No value entered...");
     }
 
-    $data = [
-        "id"    => "0",
-        "value" => $value
-    ];
+    $textByLines = explode("\n", $value);
 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, SELF_HOSTED_APPLICATION_URL);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HEADER, false);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
 
-    $response = curl_exec($ch);
+    $id = 1;
+    foreach ($textByLines as $line)
+    {
+        $data = [
+            "id"    => $id,
+            "value" => $line
+        ];
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        $response = curl_exec($ch);
+        $id++;
+    }
     $resultStatus = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-    var_dump($resultStatus);
+    if($resultStatus != HTTP_STATUS_OK)
+    {
+        die("Could not save values...");
+    }
 
-//    if($resultStatus != HTTP_STATUS_OK)
-//    {
-//        die("Could not save values...");
-//    }
-//
+    echo "Message has been sent";
+
 //    header("Location: " . SHOW_VALUE_URL . "?id=0");
