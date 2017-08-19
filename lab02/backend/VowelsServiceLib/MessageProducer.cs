@@ -8,9 +8,9 @@ using RabbitMQ.Client;
 using System.Xml.Serialization;
 using VowelsServiceLib;
 
-namespace VowelsService
+namespace VowelsServiceLib
 {
-    class MessageProducer
+    public class MessageProducer
     {
         private string _queueName;
         private IConnection _connection;

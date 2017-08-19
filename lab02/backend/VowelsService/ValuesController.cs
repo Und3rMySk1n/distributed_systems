@@ -8,7 +8,7 @@ namespace VowelsService
 {
     public class ValuesController : ApiController
     {
-        MessageProducer _producer = new MessageProducer("hello");
+        MessageProducer _producer = new MessageProducer("vowels");
 
         // GET api/values 
         public IEnumerable<string> Get()

@@ -7,9 +7,9 @@ using System.Xml.Serialization;
 using VowelsServiceLib;
 using System.Linq;
 
-namespace VowelsCalculator
+namespace ConsonantsCalculator
 {
-    class VowelsCalculator
+    class ConsonantsCalculator
     {
         public static void Main()
         {
@@ -17,7 +17,7 @@ namespace VowelsCalculator
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
-                channel.QueueDeclare(queue: "vowels",
+                channel.QueueDeclare(queue: "consonants",
                                      durable: false,
                                      exclusive: false,
                                      autoDelete: false,
@@ -37,27 +37,26 @@ namespace VowelsCalculator
                     }
 
                     var resultMessage = (Data)messageAsObject;
-                    resultMessage.vowels = CountVowels(resultMessage.value).ToString();
+                    resultMessage.consonants = CountConsonants(resultMessage.value).ToString();
 
                     Console.WriteLine("Line ID: " + resultMessage.id);
                     Console.WriteLine("Vowels: " + resultMessage.vowels);
                     Console.WriteLine("Consonants: " + resultMessage.consonants);
                     Console.WriteLine(resultMessage.value);
                 };
-                channel.BasicConsume(queue: "vowels",
-                                     noAck: true,
+                channel.BasicConsume(queue: "consonants",
                                      consumer: consumer);
 
-                Console.WriteLine(" Vowels calculator");
+                Console.WriteLine(" Consonants calculator");
                 Console.WriteLine(" Press [enter] to exit.");
                 Console.ReadLine();
             }
         }
 
-        private static int CountVowels(string word)
+        private static int CountConsonants(string word)
         {
             char[] split = word.ToLowerInvariant().ToCharArray();
-            char[] vowels = { 'a', 'e', 'i', 'o', 'u', 'y' };
+            char[] vowels = { 'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'z' };
             int count = 0;
             foreach (char vowel in split)
             {
