@@ -13,6 +13,8 @@ namespace ConsonantsCalculator
     {
         public static void Main()
         {
+            MessageProducer _producer = new MessageProducer("analyze");
+
             var factory = new ConnectionFactory() { HostName = "localhost" };
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
@@ -43,6 +45,8 @@ namespace ConsonantsCalculator
                     Console.WriteLine("Vowels: " + resultMessage.vowels);
                     Console.WriteLine("Consonants: " + resultMessage.consonants);
                     Console.WriteLine(resultMessage.value);
+
+                    _producer.SendMessage(resultMessage);
                 };
                 channel.BasicConsume(queue: "consonants",
                                      noAck: true,

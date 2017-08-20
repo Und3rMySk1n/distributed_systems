@@ -9,7 +9,8 @@ namespace VowelsService
     public class ValuesController : ApiController
     {
         MessageProducer _producer = new MessageProducer("vowels");
-
+        IStorage _storage = new RedisStorage();
+        
         // GET api/values 
         public IEnumerable<string> Get()
         {
@@ -17,10 +18,12 @@ namespace VowelsService
         }
 
         // GET api/values/5 
-        public string Get(int id)
+        public string Get(string id)
         {
-            Console.WriteLine("Value: " + id);
-            return "value";
+            var result = _storage.Get(id);
+            Console.WriteLine("Getting data: " + result);
+
+            return result;
         }
 
         // POST api/values 
@@ -35,9 +38,7 @@ namespace VowelsService
             Thread.Sleep(500);
             Console.WriteLine("Writing Data: " + data.value);
 
-            _producer.SendMessage(data);
-
-            //_storage.Save(data.id, data.value);
+            _producer.SendMessage(data);            
             return StatusCode(System.Net.HttpStatusCode.OK);
         }
     }

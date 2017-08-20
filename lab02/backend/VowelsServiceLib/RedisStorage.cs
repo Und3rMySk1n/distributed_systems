@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 using StackExchange.Redis;
 using System.Configuration;
 
-namespace VowelsService
+namespace VowelsServiceLib
 {
-    class RedisStorage : IStorage
+    public class RedisStorage : IStorage
     {
         private readonly IDatabase _db;
 
         public RedisStorage()
         {
-            var redisConnectionString = ConfigurationManager.AppSettings["redisConnectionString"];
-            ConnectionMultiplexer redis = ConnectionMultiplexer.Connect(redisConnectionString);
+            ConnectionMultiplexer redis = ConnectionMultiplexer.Connect("localhost");
 
             _db = redis.GetDatabase();
         }

@@ -1,7 +1,7 @@
 <?php
 
     const SELF_HOSTED_APPLICATION_URL = "http://localhost:9000/api/values/";
-    const SHOW_VALUE_URL = "/php/get_value.php";
+    const SHOW_VALUE_URL = "/php/get_poem.php";
     const HTTP_STATUS_OK = 200;
 
     $value = (isset($_POST["value"])) ? $_POST["value"] : null;
@@ -21,9 +21,9 @@
     foreach ($textByLines as $line)
     {
         $data = [
-            "id"     => $id,
-            "vowels" => "0",
-            "value"  => $line
+            "id"    => $id,
+            "count" => count($textByLines),
+            "value" => $line
         ];
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
         $response = curl_exec($ch);
@@ -37,5 +37,4 @@
     }
 
     echo "Message has been sent";
-
-//    header("Location: " . SHOW_VALUE_URL . "?id=0");
+    header("Location: " . SHOW_VALUE_URL . "?id=0");

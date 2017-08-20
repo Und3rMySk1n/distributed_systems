@@ -6,13 +6,20 @@ using System.Text;
 using System.Xml.Serialization;
 using VowelsServiceLib;
 using System.Linq;
+using System.Configuration;
 
-namespace VowelsCalculator
+namespace PoemAnalyzer
 {
-    class VowelsCalculator
+    class PoemAnalyzer
     {
+        private string _resultPoem = "";
+        private int _stringsNumber = 0;
+        IStorage _storage = new RedisStorage();
+
         public static void Main()
         {
+            PoemAnalyzer analyzer = new PoemAnalyzer();            
+
             var factory = new ConnectionFactory() { HostName = "localhost" };
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
@@ -40,8 +47,11 @@ namespace VowelsCalculator
                     resultMessage.isGood = Analyze(resultMessage.vowels, resultMessage.consonants);
 
                     Console.WriteLine("Line ID: " + resultMessage.id);
-                    Console.WriteLine(resultMessage.value);
                     Console.WriteLine("Is good: " + resultMessage.isGood);
+                    Console.WriteLine(resultMessage.value);
+                    Console.WriteLine();
+
+                    analyzer.PreparePoem(resultMessage);
                 };
                 channel.BasicConsume(queue: "analyze",
                                      noAck: true,
@@ -55,8 +65,27 @@ namespace VowelsCalculator
 
         private static bool Analyze(int wovels, int consonants)
         {
-            double result = wovels / consonants;
-            return (result > Math.Floor(4.0 / 6.0) && result < (Math.Floor(4.0 / 6.0) + 1));
+            return (wovels == (Math.Floor(consonants * 4.0 / 6.0)));
+        }
+
+        private void PreparePoem(Data poemString)
+        {
+            if (poemString.isGood)
+            {
+                _resultPoem += poemString.value;
+            }
+
+            _stringsNumber++;
+            if (_stringsNumber == poemString.count)
+            {
+                SavePoem();
+            }
+        }
+
+        private void SavePoem()
+        {
+            Console.WriteLine("Saving value: " + _resultPoem);
+            _storage.Save("0", _resultPoem);
         }
     }
 }

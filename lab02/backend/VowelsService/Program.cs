@@ -4,6 +4,11 @@ using System.Net.Http;
 using RabbitMQ.Client;
 using System.Text;
 
+using System.IO;
+using RabbitMQ.Client.Events;
+using System.Xml.Serialization;
+using VowelsServiceLib;
+
 namespace VowelsService
 {
     public class Program

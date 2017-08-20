@@ -1,4 +1,4 @@
-﻿namespace VowelsService
+﻿namespace VowelsServiceLib
 {
     public interface IStorage
     {
