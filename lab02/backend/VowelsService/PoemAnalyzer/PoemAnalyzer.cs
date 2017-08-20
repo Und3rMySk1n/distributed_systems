@@ -13,13 +13,11 @@ namespace VowelsCalculator
     {
         public static void Main()
         {
-            MessageProducer _producer = new MessageProducer("consonants");
-
             var factory = new ConnectionFactory() { HostName = "localhost" };
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
-                channel.QueueDeclare(queue: "vowels",
+                channel.QueueDeclare(queue: "analyze",
                                      durable: false,
                                      exclusive: false,
                                      autoDelete: false,
@@ -39,36 +37,26 @@ namespace VowelsCalculator
                     }
 
                     var resultMessage = (Data)messageAsObject;
-                    resultMessage.vowels = CountVowels(resultMessage.value);
+                    resultMessage.isGood = Analyze(resultMessage.vowels, resultMessage.consonants);
 
                     Console.WriteLine("Line ID: " + resultMessage.id);
-                    Console.WriteLine("Vowels: " + resultMessage.vowels);
-                    Console.WriteLine("Consonants: " + resultMessage.consonants);
                     Console.WriteLine(resultMessage.value);
-
-                    _producer.SendMessage(resultMessage);
+                    Console.WriteLine("Is good: " + resultMessage.isGood);
                 };
-                channel.BasicConsume(queue: "vowels",
+                channel.BasicConsume(queue: "analyze",
                                      noAck: true,
                                      consumer: consumer);
 
-                Console.WriteLine(" Vowels calculator");
+                Console.WriteLine(" Poem analyzer");
                 Console.WriteLine(" Press [enter] to exit.");
                 Console.ReadLine();
             }
         }
 
-        private static int CountVowels(string word)
+        private static bool Analyze(int wovels, int consonants)
         {
-            char[] split = word.ToLowerInvariant().ToCharArray();
-            char[] vowels = { 'a', 'e', 'i', 'o', 'u', 'y' };
-            int count = 0;
-            foreach (char vowel in split)
-            {
-                if (vowels.Contains(vowel))
-                    count++;
-            }
-            return count;
+            double result = wovels / consonants;
+            return (result > Math.Floor(4.0 / 6.0) && result < (Math.Floor(4.0 / 6.0) + 1));
         }
     }
 }

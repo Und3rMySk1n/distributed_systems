@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VowelsServiceLib", "..\Vowe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsonantsCalculator", "ConsonantsCalculator\ConsonantsCalculator.csproj", "{FB913078-5CFF-4EB2-9998-44912205B320}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoemAnalyzer", "PoemAnalyzer\PoemAnalyzer.csproj", "{33883B82-993F-4CBA-B0F5-074798E19994}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,22 @@ Global
 		{FB913078-5CFF-4EB2-9998-44912205B320}.Release|x64.Build.0 = Release|Any CPU
 		{FB913078-5CFF-4EB2-9998-44912205B320}.Release|x86.ActiveCfg = Release|Any CPU
 		{FB913078-5CFF-4EB2-9998-44912205B320}.Release|x86.Build.0 = Release|Any CPU
+		{33883B82-993F-4CBA-B0F5-074798E19994}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33883B82-993F-4CBA-B0F5-074798E19994}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33883B82-993F-4CBA-B0F5-074798E19994}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{33883B82-993F-4CBA-B0F5-074798E19994}.Debug|ARM.Build.0 = Debug|Any CPU
+		{33883B82-993F-4CBA-B0F5-074798E19994}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{33883B82-993F-4CBA-B0F5-074798E19994}.Debug|x64.Build.0 = Debug|Any CPU
+		{33883B82-993F-4CBA-B0F5-074798E19994}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{33883B82-993F-4CBA-B0F5-074798E19994}.Debug|x86.Build.0 = Debug|Any CPU
+		{33883B82-993F-4CBA-B0F5-074798E19994}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33883B82-993F-4CBA-B0F5-074798E19994}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33883B82-993F-4CBA-B0F5-074798E19994}.Release|ARM.ActiveCfg = Release|Any CPU
+		{33883B82-993F-4CBA-B0F5-074798E19994}.Release|ARM.Build.0 = Release|Any CPU
+		{33883B82-993F-4CBA-B0F5-074798E19994}.Release|x64.ActiveCfg = Release|Any CPU
+		{33883B82-993F-4CBA-B0F5-074798E19994}.Release|x64.Build.0 = Release|Any CPU
+		{33883B82-993F-4CBA-B0F5-074798E19994}.Release|x86.ActiveCfg = Release|Any CPU
+		{33883B82-993F-4CBA-B0F5-074798E19994}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

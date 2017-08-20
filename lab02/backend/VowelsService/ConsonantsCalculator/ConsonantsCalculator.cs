@@ -37,7 +37,7 @@ namespace ConsonantsCalculator
                     }
 
                     var resultMessage = (Data)messageAsObject;
-                    resultMessage.consonants = CountConsonants(resultMessage.value).ToString();
+                    resultMessage.consonants = CountConsonants(resultMessage.value);
 
                     Console.WriteLine("Line ID: " + resultMessage.id);
                     Console.WriteLine("Vowels: " + resultMessage.vowels);
@@ -45,6 +45,7 @@ namespace ConsonantsCalculator
                     Console.WriteLine(resultMessage.value);
                 };
                 channel.BasicConsume(queue: "consonants",
+                                     noAck: true,
                                      consumer: consumer);
 
                 Console.WriteLine(" Consonants calculator");

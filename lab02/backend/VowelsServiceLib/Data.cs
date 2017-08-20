@@ -2,9 +2,10 @@
 {
     public class Data
     {
-        public string id { get; set; }
-        public string vowels { get; set; }
-        public string consonants { get; set; }
+        public int id { get; set; }
+        public int vowels { get; set; }
+        public int consonants { get; set; }
         public string value { get; set; }
+        public bool isGood { get; set; }
     }
 }
