@@ -22,14 +22,9 @@
 
     $response = str_replace('"', '', $response);
     $responseByLines = explode('\n', $response);
-?>
 
-<h2>Result poem:</h2>
-<p>
-    <?php
-        foreach ($responseByLines as $line)
-        {
-            echo "$line" . "<br>";
-        }
-    ?>
-</p>
+    foreach ($responseByLines as $line)
+    {
+        echo "$line" . "<br>";
+    }
+?>

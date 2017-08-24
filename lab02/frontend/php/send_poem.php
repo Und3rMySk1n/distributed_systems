@@ -37,4 +37,4 @@
     }
 
     echo "Message has been sent";
-    header("Location: " . SHOW_VALUE_URL . "?id=0");
+    header("Location: /result/");

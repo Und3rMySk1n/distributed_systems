@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Self-hosted application test</title>
-    <link href="css/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
   </head>
   <body>
     <div class="form_wrapper">
@@ -14,8 +14,13 @@
         <label>
           <textarea name="value" id="value" placeholder="Enter text here" class="value_input"></textarea>
         </label>
-        <input type="submit" value="Submit" class="submit_button">
+        <div class="submit_button_container">
+          <input type="submit" value="Submit" class="submit_button">
+        </div>
       </form>
     </div>
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/main.js"></script>
   </body>
 </html>

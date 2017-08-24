@@ -3,16 +3,58 @@
   margin: 0;
   padding: 0;
   outline: none;
+  position: relative;
+}
+
+html,
+body
+{
+  height: 100%;
+  position: relative;
+  color: #333;
+  font-family: Georgia, sans-serif;
 }
 
 .form_wrapper
 {
-  margin: 50px auto;
+  position: relative;
+  transform: translateY(-50%);
+  margin: 0 auto;
+  top: 45%;
   padding: 40px 40px 60px;
-  border: 1px solid #ccc;
   border-radius: 10px;
   max-width: 350px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
+}
+
+.result_wrapper .form_title
+{
+  text-align: center;
+}
+
+.result_wrapper .form_title.final:after
+{
+  content: '';
+  display: block;
+  width: 50px;
+  height: 4px;
+  border-radius: 2px;
+  background: #2c5e84;
+  margin: 27px auto 35px;
+}
+
+.result_wrapper .result_preloader
+{
+  margin: 50px auto 10px;
+  display: block;
+  height: 24px;
+  width: 24px;
+  border: 2px solid #2c5e84;
+  border-right-color: transparent;
+  z-index: 2;
+  border-radius: 50%;
+  animation: spin .8s infinite linear;
+  animation-play-state: running;
 }
 
 .form_title
@@ -36,6 +78,7 @@
   transition: border 0.3s ease;
   height: 150px;
   resize: none;
+  font-family: 'Roboto', sans-serif;
 }
 
 .value_input:hover,
@@ -49,16 +92,62 @@
 {
   width: 100%;
   text-align: center;
-  padding: 8px 0;
+  padding: 12px 0;
   cursor: pointer;
   transition: background 0.3s ease;
   background: #2c5e84;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
+  font-size: 14px;
+  height: 40px;
 }
 
 .submit_button:hover
 {
   background: #2a5074;
+}
+
+.submit_button_container
+{
+  position: relative;
+}
+
+.submit_button_container.loading .submit_button
+{
+  font-size: 0;
+  z-index: 1;
+}
+
+.submit_button_container.loading:before
+{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -9px;
+  margin-bottom: -7px;
+  content: '';
+  display: block;
+  height: 14px;
+  width: 14px;
+  border: 2px solid #fff;
+  border-right-color: transparent;
+  z-index: 2;
+  border-radius: 50%;
+  animation: spin .8s infinite linear;
+  animation-play-state: running;
+}
+
+/* Animation */
+@-moz-keyframes spin {
+  from { -moz-transform: rotate(0deg); }
+  to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+  from { -webkit-transform: rotate(0deg); }
+  to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
 }
