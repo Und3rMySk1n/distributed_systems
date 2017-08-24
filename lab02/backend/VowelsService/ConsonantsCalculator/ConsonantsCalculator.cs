@@ -6,6 +6,7 @@ using System.Text;
 using System.Xml.Serialization;
 using VowelsServiceLib;
 using System.Linq;
+using System.Diagnostics;
 
 namespace ConsonantsCalculator
 {
@@ -41,10 +42,10 @@ namespace ConsonantsCalculator
                     var resultMessage = (Data)messageAsObject;
                     resultMessage.consonants = CountConsonants(resultMessage.value);
 
-                    Console.WriteLine("Line ID: " + resultMessage.id);
-                    Console.WriteLine("Vowels: " + resultMessage.vowels);
-                    Console.WriteLine("Consonants: " + resultMessage.consonants);
-                    Console.WriteLine(resultMessage.value);
+                    Debug.WriteLine("Line ID: " + resultMessage.id);
+                    Debug.WriteLine("Vowels: " + resultMessage.vowels);
+                    Debug.WriteLine("Consonants: " + resultMessage.consonants);
+                    Debug.WriteLine(resultMessage.value);
 
                     _producer.SendMessage(resultMessage);
                 };

@@ -28,5 +28,10 @@ namespace VowelsServiceLib
         {
             return _db.StringGet(id);
         }
+
+        public void Delete(string id)
+        {
+            _db.KeyDelete(id);
+        }
     }
 }

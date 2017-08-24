@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 using VowelsServiceLib;
 using System.Linq;
 using System.Configuration;
+using System.Diagnostics;
 
 namespace PoemAnalyzer
 {
@@ -46,11 +47,11 @@ namespace PoemAnalyzer
                     var resultMessage = (Data)messageAsObject;
                     resultMessage.isGood = Analyze(resultMessage.vowels, resultMessage.consonants);
 
-                    Console.WriteLine("Line ID: " + resultMessage.id);
-                    Console.WriteLine("Is good: " + resultMessage.isGood);
-                    Console.WriteLine(resultMessage.value);
-                    Console.WriteLine();
+                    Debug.WriteLine("Line ID: " + resultMessage.id);
+                    Debug.WriteLine("Is good: " + resultMessage.isGood);
+                    Debug.WriteLine(resultMessage.value);
 
+                    analyzer.PrepareStorage();
                     analyzer.PreparePoem(resultMessage);
                 };
                 channel.BasicConsume(queue: "analyze",
@@ -66,6 +67,14 @@ namespace PoemAnalyzer
         private static bool Analyze(int wovels, int consonants)
         {
             return (wovels == (Math.Floor(consonants * 4.0 / 6.0)));
+        }
+
+        private void PrepareStorage()
+        {
+            if (_stringsNumber == 0)
+            {
+                _storage.Delete("0");
+            }
         }
 
         private void PreparePoem(Data poemString)
@@ -84,8 +93,14 @@ namespace PoemAnalyzer
 
         private void SavePoem()
         {
-            Console.WriteLine("Saving value: " + _resultPoem);
             _storage.Save("0", _resultPoem);
+            ResetData();
+        }
+
+        private void ResetData()
+        {
+            _stringsNumber = 0;
+            _resultPoem = "";
         }
     }
 }
